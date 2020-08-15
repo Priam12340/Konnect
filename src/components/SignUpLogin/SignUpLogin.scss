@@ -1,0 +1,35 @@
+.SignUpLogin {
+    display: block;
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+
+    .SignUp {
+        margin-bottom: 10px;
+    }
+
+    .Login {
+        margin-bottom: 20px;
+    }
+
+    Button {
+        width: 200px;
+    }
+
+    .social-media-icons {
+        font-size: 40px;
+        display: flex;
+        width: 25%;
+        margin: 0 auto;
+
+        .fb-icon {
+            float: left;
+        }
+
+        .google-icon {
+            margin-left: 20px;
+            float: right;
+        }
+    }
+
+}
