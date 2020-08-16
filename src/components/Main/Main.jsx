@@ -1,13 +1,14 @@
 import React from "react";
-import CreateAccount from "../AccountCreation/CreateAccount";
+import Home from "../Home/Home";
 import SignUpLogin from "../SignUpLogin/SignUpLogin";
+
 import { connect } from "react-redux";
 
 const Main = ({ auth }) => {
   console.log("Showing auth", auth);
   return(
     <div>
-      {!auth.isEmpty ? <CreateAccount /> : <SignUpLogin />}
+      {!auth.isEmpty ? <Home /> : <SignUpLogin />}
     </div>  
   );
 };

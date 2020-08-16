@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Route,
-  Switch,
-  useParams
+  Switch
 } from 'react-router-dom'
 
 import Main from "./components/Main/Main";
+import Home from "./components/Home/Home";
 import SignUpLogin from "./components/SignUpLogin/SignUpLogin";
 import CreateAccount from "./components/AccountCreation/CreateAccount";
 
@@ -29,6 +29,9 @@ function App() {
         </Route>
         <Route exact path="/createAccount">
           <CreateAccount />
+        </Route>
+        <Route exact path="/home">
+          <Home />
         </Route>
       </Switch>
     </div>
