@@ -1,8 +1,13 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useParams
+} from 'react-router-dom'
 
 import Main from "./components/Main/Main";
 import SignUpLogin from "./components/SignUpLogin/SignUpLogin";
+import CreateAccount from "./components/AccountCreation/CreateAccount";
 
 import './App.css';
 
@@ -16,8 +21,15 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Main} />
-        <Route exact path="/login" component={SignUpLogin} />
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/login">
+          <SignUpLogin />
+        </Route>
+        <Route exact path="/createAccount">
+          <CreateAccount />
+        </Route>
       </Switch>
     </div>
   );

@@ -1,13 +1,20 @@
 import React from 'react';
 import './SignUpLogin.scss';
 import { Button } from "shards-react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
 
 function SignUpLogin() {
+  const history = useHistory();
+
+  function handleClick() {
+    history.push('/createAccount');
+  };
+
   return (
     <div className="SignUpLogin">
         <div className="SignUp">
-          <Button size="lg" pill theme="light">Sign Up</Button>
+          <Button size="lg" pill theme="light" onClick={handleClick}>Sign Up</Button>
         </div>
         <div className="Login">
           <Button size="lg" pill theme="info">Login</Button>
