@@ -1,23 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from "react-router-dom";
 import store from './store/store';
-import './index.css';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { BrowserRouter } from "react-router-dom";
+import firebase from './services/firebase';
 import App from './App';
+
+import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 
-ReactDOM.render(
+const rrfConfig = { userProfile: 'users' };
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch
+};
 
+ReactDOM.render(
+<React.StrictMode>
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>,
-  </Provider>,
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReactReduxFirebaseProvider>
+    </Provider>
+</React.StrictMode>,
 
   document.getElementById('root')
 );
