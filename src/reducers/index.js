@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import sessionReducer from './session';
-import userReducer from './user';
-import messageReducer from './message';
- 
+import authReducer from './auth';
+import { firebaseReducer } from "react-redux-firebase";
+
 const rootReducer = combineReducers({
-  sessionState: sessionReducer,
-  userState: userReducer,
-  messageState: messageReducer,
+  firebaseReducer,
+  authReducer
 });
  
 export default rootReducer;

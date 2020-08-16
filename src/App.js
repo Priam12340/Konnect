@@ -1,9 +1,15 @@
 import React from 'react';
-import './App.css';
-import SignUpLogin from './components/SignUpLogin/SignUpLogin';
-import { Switch, Route } from "react-router-dom";
-import Main from "./components/Main/Main";
+import {
+  Route,
+  Switch
+} from 'react-router-dom'
 
+import Main from "./components/Main/Main";
+import Home from "./components/Home/Home";
+import SignUpLogin from "./components/SignUpLogin/SignUpLogin";
+import CreateAccount from "./components/AccountCreation/CreateAccount";
+
+import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -14,10 +20,19 @@ library.add(fab, faCheckSquare, faCoffee)
 function App() {
   return (
     <div className="App">
-      <SignUpLogin/>
       <Switch>
-        <Route exact path="/" component={Main} />
-        <Route exact path="/login" component={SignUpLogin} />
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/login">
+          <SignUpLogin />
+        </Route>
+        <Route exact path="/createAccount">
+          <CreateAccount />
+        </Route>
+        <Route exact path="/home">
+          <Home />
+        </Route>
       </Switch>
     </div>
   );
