@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import SignUpLogin from './components/SignUpLogin/SignUpLogin';
+import { Switch, Route } from "react-router-dom";
+import Main from "./components/Main/Main";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,6 +15,10 @@ function App() {
   return (
     <div className="App">
       <SignUpLogin/>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/login" component={SignUpLogin} />
+      </Switch>
     </div>
   );
 }
