@@ -1,49 +1,36 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import BasicDetails from './BasicDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
+import { useFirebase } from "react-redux-firebase";
 
-class CreateAccount extends Component {
+const CreateAccount = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      step: 1
-    }
-  };
+  const [step, setStep] = useState(1);
+  const firebase = useFirebase();
 
-  nextStep = () => {
-    const { step } = this.state;
-    this.setState({
-      ...this.state,
-      step: step + 1
-    });
+  function nextStep () {
+    setStep(step + 1);
   }
 
-  prevStep = () => {
-    const { step } = this.state;
-    this.setState({
-      ...this.state,
-      step: step - 1
-    });
+  function prevStep () {
+    setStep(step - 1);
   }
 
-  saveDetails = (detailsObj) => {
-    console.log("Details received ", detailsObj);
+  function saveDetails (detailsObj) {
+    const sampleTodo = { text: 'Pramothini', done: true };
+    return firebase.push('todos', sampleTodo);
   }
 
-  render() {
-    const { step } = this.state;
-    switch(step) {
-      case 1: return <BasicDetails className="CreateAccount"
-                    nextStep={this.nextStep} />;
-      case 2: return <AdditionalDetails className="CreateAccount"
-                    nextStep={this.nextStep}
-                    prevStep={this.prevStep} />;
-      case 3: return <Interests className="CreateAccount"
-                    saveDetails={this.saveDetails}
-                    prevStep={this.prevStep} />;
-    }
+  switch(step) {
+  case 1: return <BasicDetails className="CreateAccount"
+                nextStep={nextStep} />;
+  case 2: return <AdditionalDetails className="CreateAccount"
+                nextStep={nextStep}
+                prevStep={prevStep} />;
+  case 3: return <Interests className="CreateAccount"
+                saveDetails={saveDetails}
+                prevStep={prevStep} />;
   }
 
 }

@@ -6,35 +6,27 @@ import {
   Button 
 } from "shards-react";
 
-class BasicDetails extends Component {
+const BasicDetails = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.handleSaveAndContinue = this.handleSaveAndContinue.bind(this);
+  function handleSaveAndContinue() {
+    props.nextStep();
   }
 
-  handleSaveAndContinue() {
-    this.props.nextStep();
-  }
-
-  render() {
-    return (
-      <div className="BasicDetails">
-          <Form className="basic-details-form">
-              <FormGroup>
-                  <label htmlFor="#username">User name</label>
-                  <FormInput id="#username" placeholder="Username" />
-              </FormGroup>
-              <FormGroup>
-                  <label htmlFor="#password">Password</label>
-                  <FormInput type="password" id="#password" placeholder="Password" />
-              </FormGroup>
-          </Form>
-          <Button size="lg" pill theme="light" onClick={this.handleSaveAndContinue}>Save &amp; Continue</Button>
-      </div>
-    );
-  }
-
-
+  return (
+    <div className="BasicDetails">
+        <Form className="basic-details-form">
+            <FormGroup>
+                <label htmlFor="#username">User name</label>
+                <FormInput id="#username" placeholder="Username" />
+            </FormGroup>
+            <FormGroup>
+                <label htmlFor="#password">Password</label>
+                <FormInput type="password" id="#password" placeholder="Password" />
+            </FormGroup>
+        </Form>
+        <Button size="lg" pill theme="light" onClick={handleSaveAndContinue}>Save &amp; Continue</Button>
+    </div>
+  );
 }
+
 export default BasicDetails;
