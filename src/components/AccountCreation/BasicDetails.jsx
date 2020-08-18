@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { 
-  Form, 
-  FormInput, 
-  FormGroup, 
-  Button 
-} from "shards-react";
+import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, ButtonToolbar, Button } from 'rsuite';
 
 const BasicDetails = (props) => {
 
@@ -12,21 +7,42 @@ const BasicDetails = (props) => {
     props.nextStep();
   }
 
-  return (
-    <div className="BasicDetails">
-        <Form className="basic-details-form">
-            <FormGroup>
-                <label htmlFor="#username">User name</label>
-                <FormInput id="#username" placeholder="Username" />
+
+  handleSaveAndContinue() {
+    this.props.nextStep();
+  }
+
+  render() {
+    return (
+      <div className="BasicDetails">
+        <Form>
+          <div className="username">
+            <FormGroup className= "form-group">
+              <ControlLabel>Username</ControlLabel>
+              <FormControl name="name" />
+              <HelpBlock>Required</HelpBlock>
             </FormGroup>
+          </div>
+
+          <div className="email">
             <FormGroup>
-                <label htmlFor="#password">Password</label>
-                <FormInput type="password" id="#password" placeholder="Password" />
+              <ControlLabel>Email</ControlLabel>
+              <FormControl name="email" type="email" />
+              <HelpBlock tooltip>Required</HelpBlock>
             </FormGroup>
+          </div>
+          <div className="password">
+            <FormGroup>
+              <ControlLabel>Password</ControlLabel>
+              <FormControl name="password" type="password" />
+            </FormGroup>
+          </div>
         </Form>
-        <Button size="lg" pill theme="light" onClick={handleSaveAndContinue}>Save &amp; Continue</Button>
-    </div>
-  );
+        <Button size="lg" pill theme="light" onClick={this.handleSaveAndContinue}>Save &amp; Continue</Button>
+      </div >
+    );
+  }
+
 }
 
 export default BasicDetails;
