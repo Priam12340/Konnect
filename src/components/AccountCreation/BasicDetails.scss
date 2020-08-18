@@ -1,19 +1,21 @@
 .BasicDetails {
-        display: block;
-        position: absolute;
-        bottom: 100px;
-        width: 100%;
-    
-        .form-group {
-            font-size: 100px;
-            margin-bottom: 10px;
-        }
-    
-        .email {
-            margin-bottom: 20px;
-        }
-    
-        .password {
-            width: 200px;
-        }
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
+    Button {
+        margin-top: 20px;
+    }
+
+    .email {
+        margin-top: 20px;
+    }
+
+    .password {
+        margin-top: 20px;
+    }
 }
