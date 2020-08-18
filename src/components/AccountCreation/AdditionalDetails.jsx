@@ -1,36 +1,47 @@
-import React, { Component } from "react";
-import { 
-  Form, 
-  FormInput, 
-  FormGroup, 
-  Button 
-} from "shards-react";
-import { Dropdown } from 'rsuite';
+import React, { useState } from "react";
+import { Dropdown, DatePicker, Button } from 'rsuite';
 
-class AdditionalDetails extends Component {
+import './AdditionalDetails.scss';
 
-  constructor(props) {
-    super(props);
-    this.handleSaveAndContinue = this.handleSaveAndContinue.bind(this);
-    this.handlePrevious = this.handlePrevious.bind(this);
+const AdditionalDetails = (props) => {
+
+  const [additionalDetails, setAdditionalDetails] = useState(props.additionalDetails);
+
+  function handleSaveAndContinue() {
+    props.saveAdditionalDetails(additionalDetails);
+    props.nextStep();
   }
 
-  handleSaveAndContinue() {
-    this.props.nextStep();
+  function handlePrevious() {
+    props.prevStep();
   }
 
-  handlePrevious() {
-    this.props.prevStep();
+  function handleDropdownSelect(eventKey, event) {
+    setAdditionalDetails({
+      ...additionalDetails,
+      gender: eventKey
+    });
   }
 
-  render() {
-    return (
-      <div className="AdditionalDetails">
-          <Button size="lg" pill theme="light" onClick={this.handlePrevious}>Go Back</Button>
-          <Button size="lg" pill theme="light" onClick={this.handleSaveAndContinue}>Save &amp; Continue</Button>
+  return (
+    <div className="AdditionalDetails">
+      <div className="gender-dropdown">
+      <Dropdown size="lg" title={additionalDetails.gender || "Choose Gender"} trigger="hover" appearance="default" onSelect={handleDropdownSelect}>
+        <Dropdown.Item active={additionalDetails.gender === 'Male'} eventKey={'Male'}>Male</Dropdown.Item>
+        <Dropdown.Item active={additionalDetails.gender === 'Female'} eventKey={'Female'}>Female</Dropdown.Item>
+        <Dropdown.Item active={additionalDetails.gender === 'Don\'t wish to specify'} eventKey={'Don\'t wish to specify'}>Don't wish to specify</Dropdown.Item>
+      </Dropdown>
       </div>
-    );
-  }
+      <div className="date-of-birth">
+        <label className="dob-label">Date Of Birth</label>
+        <DatePicker size="lg" placeholder="Select Date Of Birth" value={additionalDetails.dob || new Date()} onChange={dob => setAdditionalDetails({ ...additionalDetails, dob: dob })} />
+      </div>
+      <div className="create-account-navigation">
+        <Button size="lg" theme="light" onClick={handlePrevious}>Go Back</Button>
+        <Button size="lg" theme="light" onClick={handleSaveAndContinue}>Save &amp; Continue</Button>
+      </div>
+    </div>
+  );
 
 
 }
