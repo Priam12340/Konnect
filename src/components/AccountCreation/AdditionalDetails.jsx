@@ -5,6 +5,7 @@ import {
   FormGroup, 
   Button 
 } from "shards-react";
+import { Dropdown } from 'rsuite';
 
 class AdditionalDetails extends Component {
 
