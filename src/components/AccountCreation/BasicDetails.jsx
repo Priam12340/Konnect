@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Form, FormGroup, FormControl, ControlLabel, HelpBlock, ButtonToolbar, Button } from 'rsuite';
 
-class BasicDetails extends Component {
+const BasicDetails = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.handleSaveAndContinue = this.handleSaveAndContinue.bind(this);
+  function handleSaveAndContinue() {
+    props.nextStep();
   }
+
 
   handleSaveAndContinue() {
     this.props.nextStep();
@@ -42,5 +42,7 @@ class BasicDetails extends Component {
       </div >
     );
   }
+
 }
+
 export default BasicDetails;
