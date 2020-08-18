@@ -18,9 +18,8 @@ const CreateAccount = (props) => {
   });
 
   const [additionalDetails, setAdditionalDetails] = useState({
-    fullName: "John Smith",
-    email: "google@gmail.com",
-    password: 'HTML5'
+    dob: new Date(),
+    gender: ''
   });
   const firebase = useFirebase();
 

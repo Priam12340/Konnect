@@ -1,0 +1,31 @@
+.AdditionalDetails {
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
+    .create-account-navigation {
+        margin-top: 20px;
+    }
+
+    Button {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .date-of-birth {
+        margin-top: 20px;
+    }
+
+    .dob-label {
+        font-size: 30px;
+        margin-right: 10px;
+    }
+
+    .gender-dropdown {
+        margin-top: 20px;
+    }
+}
