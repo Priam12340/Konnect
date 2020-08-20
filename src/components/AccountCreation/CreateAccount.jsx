@@ -66,7 +66,7 @@ const CreateAccount = (props) => {
   }
 
   switch(step) {
-  case 3: return <BasicDetails className="CreateAccount"
+  case 1: return <BasicDetails className="CreateAccount"
                 saveBasicDetails={saveBasicDetails}
                 basicDetails={basicDetails}
                 nextStep={nextStep} />;
@@ -75,7 +75,7 @@ const CreateAccount = (props) => {
                 additionalDetails={additionalDetails}
                 nextStep={nextStep}
                 prevStep={prevStep} />;
-  case 1: return <Interests className="CreateAccount"
+  case 3: return <Interests className="CreateAccount"
                 interests={interests}
                 setInterests={setInterests}
                 persistDetails={persistDetails}
