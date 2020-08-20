@@ -8,11 +8,6 @@ import {
 
 const Home = () => {
 
-    let card = [
-        { "type": "running", "img":"/location"}, 
-        { "type": "running", "img":"/location"}
-    ];
-
     function handleCardClick() {
         console.log("Card clicked");
     }

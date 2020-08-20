@@ -26,7 +26,7 @@ const AdditionalDetails = (props) => {
   return (
     <div className="AdditionalDetails">
       <div className="gender-dropdown">
-      <Dropdown size="lg" title={additionalDetails.gender || "Choose Gender"} trigger="hover" appearance="default" onSelect={handleDropdownSelect}>
+      <Dropdown size="lg" title={additionalDetails.gender || "Choose Gender"} trigger="click" appearance="default" onSelect={handleDropdownSelect}>
         <Dropdown.Item active={additionalDetails.gender === 'Male'} eventKey={'Male'}>Male</Dropdown.Item>
         <Dropdown.Item active={additionalDetails.gender === 'Female'} eventKey={'Female'}>Female</Dropdown.Item>
         <Dropdown.Item active={additionalDetails.gender === 'Don\'t wish to specify'} eventKey={'Don\'t wish to specify'}>Don't wish to specify</Dropdown.Item>

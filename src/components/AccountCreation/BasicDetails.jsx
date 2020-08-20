@@ -37,7 +37,6 @@ const BasicDetails = (props) => {
   });
 
   const [formValue, setFormValue] = useState(props.basicDetails);
-  const [formError, setFormError] = useState({});
 
   function handleSaveAndContinue() {
     props.saveBasicDetails(formValue);
@@ -48,8 +47,7 @@ const BasicDetails = (props) => {
     <div className="BasicDetails">
       <Form model={model} 
             formDefaultValue={formValue || ''} 
-            onChange={formValue => setFormValue(formValue)} 
-            onCheck={formError => setFormError(formError)}>
+            onChange={formValue => setFormValue(formValue)}>
         <div className="fullName">
           <TextField name="fullName" label="Full Name" />
         </div>

@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import BasicDetails from './BasicDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
-import { useFirebase } from "react-redux-firebase";
+// import { useFirebase } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 
 const CreateAccount = (props) => {
+
+  // const firebase = useFirebase();
+  const firestore = useFirestore();
 
   //State Variables defined
   const [step, setStep] = useState(1);
@@ -21,8 +25,7 @@ const CreateAccount = (props) => {
     dob: new Date(),
     gender: ''
   });
-  const firebase = useFirebase();
-
+  
   function nextStep () {
     setStep(step + 1);
   }
@@ -31,10 +34,26 @@ const CreateAccount = (props) => {
     setStep(step - 1);
   }
 
-  function persistDetails (detailsObj) {
-    const sampleTodo = { text: 'Pramothini', done: true };
-    return firebase.push('todos', sampleTodo);
-  }
+  // function persistDetails (detailsObj) {
+  //   const sampleTodo = { text: 'Pramothini', done: true };
+  //   return firebase.push('todos', sampleTodo);
+  // }
+
+  function persistDetails() {
+    firestore
+      .collection("users")
+      .doc('123')
+      .collection("todos")
+      .add({
+        title: 'Test',
+        isDone: false,
+      })
+      .then((docRef) => {
+        docRef.update({
+          todoID: docRef.id,
+        });
+      });
+  };
 
   function saveBasicDetails (basicDetails) {
     console.log("Showing basic details ", basicDetails);
@@ -58,8 +77,10 @@ const CreateAccount = (props) => {
                 prevStep={prevStep} />;
   case 3: return <Interests className="CreateAccount"
                 interests={interests}
+                setInterests={setInterests}
                 persistDetails={persistDetails}
                 prevStep={prevStep} />;
+  default: return ;
   }
 
 }
