@@ -80,6 +80,7 @@ const CreateAccount = (props) => {
                 setInterests={setInterests}
                 persistDetails={persistDetails}
                 prevStep={prevStep} />;
+  default: return ;
   }
 
 }
