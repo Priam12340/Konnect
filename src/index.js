@@ -5,6 +5,7 @@ import store from './store/store';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { BrowserRouter } from "react-router-dom";
 import firebase from './services/firebase';
+import { createFirestoreInstance } from 'redux-firestore';
 import App from './App';
 
 import './index.css';
@@ -15,11 +16,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import 'rsuite/dist/styles/rsuite-default.css';
 
-const rrfConfig = { userProfile: 'users' };
+const rrfConfig = { userProfile: 'users', useFirestoreForProfile: true };
 const rrfProps = {
   firebase,
   config: rrfConfig,
-  dispatch: store.dispatch
+  dispatch: store.dispatch,
+  createFirestoreInstance
 };
 
 ReactDOM.render(

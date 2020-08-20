@@ -12,7 +12,7 @@ class Interests extends Component {
   }
 
   handleSaveDetails() {
-    this.props.saveDetails();
+    this.props.persistDetails();
   }
 
   handlePrevious() {
