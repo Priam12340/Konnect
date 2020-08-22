@@ -3,17 +3,48 @@ import BasicDetails from './BasicDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
 // import { useFirebase } from "react-redux-firebase";
-import { useFirestore } from "react-redux-firebase";
+// import { useFirestore } from "react-redux-firebase";
 
 const CreateAccount = (props) => {
 
   // const firebase = useFirebase();
-  const firestore = useFirestore();
+  // const firestore = useFirestore();
 
   //State Variables defined
   const [step, setStep] = useState(1);
   
-  const [interests, setInterests] = useState();
+  const [interests, setInterests] = useState([
+    {
+      id: '1',
+      img: 'https://picsum.photos/100',
+      label: 'Running'
+    },
+    {
+      id: '2',
+      img: 'https://picsum.photos/100',
+      label: 'Cooking'
+    },
+    {
+      id: '3',
+      img: 'https://picsum.photos/100',
+      label: 'Golfing'
+    },
+    {
+      id: '4',
+      img: 'https://picsum.photos/100',
+      label: 'Badminton'
+    },
+    {
+      id: '5',
+      img: 'https://picsum.photos/100',
+      label: 'Squash'
+    },
+    {
+      id: '6',
+      img: 'https://picsum.photos/100',
+      label: 'Soccer'
+    }
+  ]);
 
   const [basicDetails, setBasicDetails] = useState({
     fullName: '',
@@ -39,20 +70,9 @@ const CreateAccount = (props) => {
   //   return firebase.push('todos', sampleTodo);
   // }
 
-  function persistDetails() {
-    firestore
-      .collection("users")
-      .doc('123')
-      .collection("todos")
-      .add({
-        title: 'Test',
-        isDone: false,
-      })
-      .then((docRef) => {
-        docRef.update({
-          todoID: docRef.id,
-        });
-      });
+  function persistDetails(interests) {
+    console.log("Showing interests ", interests);
+    setInterests(interests);
   };
 
   function saveBasicDetails (basicDetails) {

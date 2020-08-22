@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "../Home/Home";
 import SignUpLogin from "../SignUpLogin/SignUpLogin";
 
 import { connect } from "react-redux";
 
 const Main = ({ auth }) => {
-  console.log("Showing auth", auth);
-  return(
+
+  useEffect(() => {
+    navigator.permissions.query({name:'geolocation'}).then(function(result) {
+      if (result.state === 'granted') {
+        console.log('Permission ', result.state);
+      } else if (result.state === 'prompt') {
+        console.log('Permission ', result.state);
+      } else if (result.state === 'denied') {
+        console.log('Permission ', result.state);
+      }
+      result.onchange = function() {
+        console.log('Permission ', result.state);
+      }
+    });
+  });
+
+  return (
     <div>
       {!auth.isEmpty ? <Home /> : <SignUpLogin />}
-    </div>  
+    </div>
   );
 };
 
