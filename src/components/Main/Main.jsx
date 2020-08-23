@@ -27,11 +27,11 @@ const Main = ({ auth }) => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
-  function revokePermission() {
-    navigator.permissions.revoke({name:'geolocation'}).then(function(result) {
-      console.log('Permission ', result.state);
-    });
-  }
+  // function revokePermission() {
+  //   navigator.permissions.revoke({name:'geolocation'}).then(function(result) {
+  //     console.log('Permission ', result.state);
+  //   });
+  // }
 
   useEffect(() => {
     navigator.permissions.query({name:'geolocation'}).then(function(result) {
