@@ -62,14 +62,16 @@ const Interests = (props) => {
       </div>
       {showCompletion && <Modal dialogClassName="completion-modal" centered animation={false} show={showCompletion} onHide={acceptAck}>
         <Modal.Body>
-          <div className="completion-modal-title">
-          BRAVO!
+          <div className="modal-section">
+            <div className="completion-modal-title">
+              BRAVO!
           </div>
-          <div className="completion-modal-content">
-          Your profile has been created
+            <div className="completion-modal-content">
+              Your profile has been created
           </div>
-          <div className="completion-modal-image">
-          <img src={tickmark} alt="Tick" onClick={acceptAck} style={{ width: "50px", height: "50px" }} />
+            <div className="completion-modal-image">
+              <img src={tickmark} alt="Tick" onClick={acceptAck} style={{ width: "50px", height: "50px" }} />
+            </div>
           </div>
         </Modal.Body>
       </Modal>}
