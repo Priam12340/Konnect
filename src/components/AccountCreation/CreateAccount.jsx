@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BasicDetails from './BasicDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
+import './CreateAccount.scss';
 // import { useFirebase } from "react-redux-firebase";
 // import { useFirestore } from "react-redux-firebase";
 
@@ -43,6 +44,36 @@ const CreateAccount = (props) => {
       id: '6',
       img: 'https://picsum.photos/100',
       label: 'Soccer'
+    },
+    {
+      id: '7',
+      img: 'https://picsum.photos/100',
+      label: 'Running'
+    },
+    {
+      id: '8',
+      img: 'https://picsum.photos/100',
+      label: 'Cooking'
+    },
+    {
+      id: '9',
+      img: 'https://picsum.photos/100',
+      label: 'Golfing'
+    },
+    {
+      id: '10',
+      img: 'https://picsum.photos/100',
+      label: 'Badminton'
+    },
+    {
+      id: '11',
+      img: 'https://picsum.photos/100',
+      label: 'Squash'
+    },
+    {
+      id: '12',
+      img: 'https://picsum.photos/100',
+      label: 'Soccer'
     }
   ]);
 
@@ -64,11 +95,6 @@ const CreateAccount = (props) => {
   function prevStep () {
     setStep(step - 1);
   }
-
-  // function persistDetails (detailsObj) {
-  //   const sampleTodo = { text: 'Pramothini', done: true };
-  //   return firebase.push('todos', sampleTodo);
-  // }
 
   function persistDetails(interests) {
     console.log("Showing interests ", interests);
