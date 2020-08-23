@@ -1,31 +1,46 @@
 .AdditionalDetails {
-    padding: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
 
-    .create-account-navigation {
-        margin-top: 20px;
+    background-color: #FFF8F8;
+    width: 100vw;
+    height: 100vh;
+
+    .Prev {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        float: left;
+        margin: 50px 0 0 50px;
     }
 
-    Button {
-        margin-right: 10px;
-        margin-left: 10px;
+    .Next {
+        float: right;
+        margin: 50px 50px 0 0;
     }
 
-    .date-of-birth {
-        margin-top: 20px;
-    }
+    .AdditionalDetailsSection {
+        height: 80vh;
+        width: 80vw;
+        display: flex;
+        flex-direction: column;  
+        justify-content: center;
+        
+        .date-of-birth {
+            margin: 20px 0 0 50px;
+        }
 
-    .dob-label {
-        font-size: 30px;
-        margin-right: 10px;
-    }
+        .dob-label {
+            margin: 20px 0 0 50px;
+            color: #1C44E4;
+            text-align: left;
+            vertical-align: top;
+            font-family: 'Trebuchet MS';
+            font-style: normal;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    .gender-dropdown {
-        margin-top: 20px;
+        .gender-dropdown {
+            margin: -250px 0 100px 50px;
+        }
+
     }
 }

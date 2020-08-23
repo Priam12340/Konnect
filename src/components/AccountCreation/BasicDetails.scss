@@ -1,11 +1,44 @@
 .BasicDetails {
-    padding: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    background-color: #FFF8F8;
+    width: 100vw;
+    height: 100vh;
+
+    .Prev {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        float: left;
+        margin: 50px 0 0 50px;
+    }
+
+    .Next {
+        float: right;
+        margin: 50px 50px 0 0;
+    }
+
+    .BasicDetailsSection {
+        height: 80vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;  
+        justify-content: center;
+
+    h4 {
+        color: #1C44E4;
+        text-align: left;
+        vertical-align: top;
+        font-family: 'Trebuchet MS';
+        font-style: normal;
+        font-size: 28px;
+        font-weight: bold;
+        margin: -100px 0 100px 50px;
+    }
+
+    .BasicDetailsForm {
+        display: flex;
+        align-items: center;
+        flex-direction: column;  
+        justify-content: center;
+    }
 
     Button {
         margin-top: 20px;
@@ -18,5 +51,8 @@
     .password {
         margin-top: 20px;
     }
+    }
+
+
 
 }

@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import {
-  Button
-} from "shards-react";
 import Modal from 'react-bootstrap/Modal';
 import ImagePicker from 'react-image-picker';
 import Masonry from "react-masonry-component";
@@ -10,6 +7,7 @@ import { masonryOptions } from "../../exports";
 import './Interests.scss';
 
 import tickmark from '../../assets/tickmark.jpg';
+import next from '../../assets/next.png';
 
 const Interests = (props) => {
 
@@ -42,6 +40,8 @@ const Interests = (props) => {
 
   return (
     <div className="Interests">
+      <img className="Prev" src={next} onClick={handlePrevious} alt="Previous" />
+      <img className="Next" src={next} onClick={handleSaveDetails} alt="Save&amp;Continue" />
       <div className="interest-set">
         <h4>Choose five categories that represent your hobbies</h4>
         <Masonry
@@ -59,16 +59,19 @@ const Interests = (props) => {
             />
           </div>
         </Masonry>
-        <Button size="lg" pill theme="light" onClick={handlePrevious}>Go Back</Button>
-        <Button size="lg" pill theme="light" onClick={handleSaveDetails}>Submit</Button>
       </div>
-      {showCompletion && <Modal animation={false} show={showCompletion} onHide={acceptAck}>
+      {showCompletion && <Modal dialogClassName="completion-modal" centered animation={false} show={showCompletion} onHide={acceptAck}>
         <Modal.Body>
+          <div className="completion-modal-title">
           BRAVO!
+          </div>
+          <div className="completion-modal-content">
           Your profile has been created
+          </div>
+          <div className="completion-modal-image">
           <img src={tickmark} alt="Tick" onClick={acceptAck} style={{ width: "50px", height: "50px" }} />
+          </div>
         </Modal.Body>
-
       </Modal>}
     </div>
   );
