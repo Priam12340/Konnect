@@ -49,16 +49,16 @@ const BasicDetails = (props) => {
             formDefaultValue={formValue || ''} 
             onChange={formValue => setFormValue(formValue)}>
         <div className="fullName">
-          <TextField name="fullName" label="Full Name" />
+          <TextField name="fullName" placeholder="Full name"/>
         </div>
 
         <div className="email">
-          <TextField name="email" label="Email" />
+          <TextField name="email" placeholder="email ID" />
         </div>
 
         <div className="password">
-          <TextField name="password" label="Password" type="password" />
-          <TextField name="verifyPassword" label="Verify password" type="password" />
+          <TextField name="password" placeholder="Password" type="password" />
+          <TextField name="verifyPassword" placeholder="Verify Password" type="password" />
         </div>
       </Form>
       <Button size="lg" pill="true" theme="light" onClick={handleSaveAndContinue}>Save &amp; Continue</Button>
