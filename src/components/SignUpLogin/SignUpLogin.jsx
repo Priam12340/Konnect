@@ -12,13 +12,14 @@ function SignUpLogin() {
   };
 
   return (
-    <div className="SignUpLogin">
+    <div className="bg">
+      <div className="SignUpLogin">
         <div className="SignUp">
-          <Button size="lg" pill theme="light" onClick={handleSignupClick}>Sign Up</Button>
+          <Button className="signUpButton" size="lg" pill theme="light" onClick={handleSignupClick}>Sign Up</Button>
         </div>
         <div className="Login">
-          <Button size="lg" pill theme="info">Login</Button>
-        </div> 
+          <Button className="loginButton" size="lg" pill theme="info">Login</Button>
+        </div>
         <div className="social-media-icons">
           <div className="fb-icon">
             <FontAwesomeIcon icon={['fab', 'facebook']} />
@@ -27,6 +28,7 @@ function SignUpLogin() {
             <FontAwesomeIcon icon={['fab', 'google']} />
           </div>
         </div>
+      </div>
     </div>
   );
 }

@@ -1,35 +1,64 @@
-.SignUpLogin {
-    display: block;
-    position: absolute;
-    bottom: 100px;
-    width: 100%;
+.bg {
+    background-image: url("../../assets/p2.png");
 
-    .SignUp {
-        margin-bottom: 10px;
-    }
+    /* Full height */
+    height: 100vh;
 
-    .Login {
-        margin-bottom: 20px;
-    }
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-    Button {
-        width: 200px;
-    }
-
-    .social-media-icons {
-        font-size: 40px;
-        display: flex;
-        width: 25%;
-        margin: 0 auto;
-
-        .fb-icon {
-            float: left;
+    .SignUpLogin {
+        display: block;
+        position: absolute;
+        bottom: 100px;
+        width: 100%;
+    
+        .SignUp {
+            margin-bottom: 10px;
+            .SignUpbutton {
+                background-color: #2699FB;
+                font-family: Arial;
+                font-style: normal;
+                font-weight: bold ;
+                font-size: 15px;
+            }
         }
-
-        .google-icon {
-            margin-left: 20px;
-            float: right;
+    
+        .Login {
+            margin-bottom: 20px;
+            .Loginbutton {
+                background-color: #0020A0;
+                font-family: Arial;
+                font-style: normal;
+                font-weight: bold ;
+                font-size: 15px;
+            }
         }
+    
+    
+        Button {
+            width: 200px;
+        }
+    
+        .social-media-icons {
+            font-size: 40px;
+            display: flex;
+            width: 25%;
+            margin: 0 auto;
+    
+            .fb-icon {
+                float: left;
+                color: #3b5998;
+            }
+    
+            .google-icon {
+                margin-left: 20px;
+                float: right;
+            }
+        } 
+    
     }
-
 }
+

@@ -15,6 +15,8 @@ import * as serviceWorker from './serviceWorker';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import 'rsuite/dist/styles/rsuite-default.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-image-picker/dist/index.css';
 
 const rrfConfig = { userProfile: 'users', useFirestoreForProfile: true };
 const rrfProps = {

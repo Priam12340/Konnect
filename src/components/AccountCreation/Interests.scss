@@ -1,18 +1,38 @@
 .Interests {
+
+    .interest-set {
+        position: fixed; /* or absolute */
+        top: 50%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        margin: 0 auto;
+        width: 300px;
+    }
+    .grid-cols {
+        -moz-column-count:2;
+        -moz-column-gap: 5px;
+        -moz-column-width: 50%;
+        -webkit-column-count:2;
+        -webkit-column-gap: 5px;
+        -webkit-column-width: 2505%;
+        column-count: 2;
+        column-gap: 5px;
+        column-width: 50%;
+    }
+
     .completion-modal {
-        width: 75%;
-        height: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
          
         .completion-modal-title {
             text-align: center;
             vertical-align: middle;
             line-height: 50%; 
         }
-    
-        .completion-modal-body {
-    
-        }
-    
+
         .completion-modal-image {
             img {
                 width: 10px;
