@@ -1,0 +1,48 @@
+.Home {
+
+    background-color: #FFF8F8;
+    width: 100vw;
+    height: 100vh;
+
+    .interest-set {
+        height: 80vh;
+        width: 80vw;
+        display: flex;
+        flex-direction: column;  
+        justify-content: center;
+        margin: 0 auto;
+        overflow: auto;
+    }
+
+    .user-interest-card {
+
+        .interest-card-item {
+            cursor: pointer;
+            width: 18rem;
+
+            .interest-card-image {
+
+            }
+
+            .interest-card-body {
+                .interest-card-title {
+                    font-size: 40px;
+                }
+            }
+        }
+    }
+
+
+    .grid-cols {
+        -moz-column-count:2;
+        -moz-column-gap: 5px;
+        -moz-column-width: 50%;
+        -webkit-column-count:2;
+        -webkit-column-gap: 5px;
+        -webkit-column-width: 2505%;
+        column-count: 2;
+        column-gap: 5px;
+        column-width: 50%;
+    }
+
+}
