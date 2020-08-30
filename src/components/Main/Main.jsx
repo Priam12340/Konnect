@@ -1,18 +1,27 @@
-import React, { useEffect } from "react";
+import React, { Component } from "react";
 import Home from "../Home/Home";
 import SignUpLogin from "../SignUpLogin/SignUpLogin";
+import SignUpLoginWithWidget from "../SignUpLogin/SignUpLoginWithWidget";
+import { withOktaAuth } from '@okta/okta-react';
 
 import { connect } from "react-redux";
 
-const Main = ({ auth }) => {
+export default withOktaAuth(class Home extends Component {
 
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-  };
-  
-  function success(pos) {
+  constructor(props) {
+    super(props);
+    this.success = this.success.bind(this);
+    this.error = this.error.bind(this);
+
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+  }
+
+
+  success(pos) {
     let crd = pos.coords;
     let dateRetrieved = new Date(pos.timestamp);
     console.log('Your current position is:');
@@ -22,8 +31,8 @@ const Main = ({ auth }) => {
     console.log(`Retrieved at ${dateRetrieved}`);
 
   }
-  
-  function error(err) {
+
+  error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
@@ -33,33 +42,32 @@ const Main = ({ auth }) => {
   //   });
   // }
 
-  useEffect(() => {
-    navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  componentDidMoint() {
+    navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
       if (result.state === 'granted') {
         console.log('Permission ', result.state);
       } else if (result.state === 'prompt') {
         console.log('Permission ', result.state);
-        navigator.geolocation.getCurrentPosition(success, error, options);
+        navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
       } else if (result.state === 'denied') {
         console.log('Permission ', result.state);
       }
-      result.onchange = function() {
+      result.onchange = function () {
         console.log('Permission ', result.state);
       }
     });
-  });
+  }
 
-  return (
-    <div>
-      {!auth.isEmpty ? <Home /> : <SignUpLogin />}
-    </div>
-  );
-};
+  render() {
+    if (this.props.authState.isPending) return null;
+    const button = this.props.authState.isAuthenticated ?
+    <Home /> :
+    <SignUpLoginWithWidget baseUrl='https://dev-634748.okta.com' />;
+    return (
+      <div>
+        {button}
+      </div>
+    );
+  }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.firebaseReducer.auth
-  };
-}
-
-export default connect(mapStateToProps)(Main);
+});
