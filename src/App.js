@@ -28,7 +28,7 @@ function App(props) {
   let config = {
     issuer: 'https://dev-634748.okta.com/oauth2/default',
     clientId: '0oas5wo0qLyjtyiHo4x6',
-    redirectUri: 'http://localhost:3000/home',
+    redirectUri: window.location.origin + '/home',
     onAuthRequired: { onAuthRequired },
     idps: [
       { type: 'Facebook', id: '0oau09hynibyENpba4x6' }
