@@ -3,10 +3,11 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import { Security } from '@okta/okta-react';
 
 import Main from "./components/Main/Main";
 import Home from "./components/Home/Home";
+import PeopleNearMe from "./components/PeopleNearMe/PeopleNearMe";
 import SignUpLoginWithWidget from "./components/SignUpLogin/SignUpLoginWithWidget";
 import CreateAccount from "./components/AccountCreation/CreateAccount";
 import Profile from "./components/Profile/Profile";
@@ -15,9 +16,9 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faEnvelope} from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faCheckSquare, faCoffee)
+library.add(fab, faCheckSquare, faCoffee, faEnvelope)
 
 function App(props) {
 
@@ -39,7 +40,7 @@ function App(props) {
   return (
     <div className="App">
       <Switch>
-        <Security  >
+        <Security {...config} >
           <Route exact path="/">
             <Main />
           </Route>
@@ -54,6 +55,9 @@ function App(props) {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route path="/peopleNearMe/:id">
+            <PeopleNearMe />
           </Route>
         </Security>
       </Switch>

@@ -1,0 +1,36 @@
+.PersonCard {
+    
+    display: flex;
+    width: 100%;
+    background-color: #FBFBFB;
+    margin: 10px 0 10px 0;
+    height: 100px;
+
+    .profile-nav {
+        margin: auto;
+    }
+
+    .user-details {
+        text-align: left;
+        margin: auto;
+
+        .user-name {
+            font-size: 1.25em;
+        }
+
+        .user-area {
+            font-size: 1em;
+        }
+    }
+
+    .mail-icon {
+        margin: auto;
+        font-size: 2em;
+    }
+
+    .plus-icon {
+        color: #0020A0;
+        margin: auto;
+        font-size: 2em;
+    }
+}
