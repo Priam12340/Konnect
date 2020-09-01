@@ -26,9 +26,14 @@ const Home = (props) => {
     });
 
     function handleCardClick(interestType) {
-        console.log("Card clicked", interestType);
+        let index;
+        for (index = 0; index < userDetails.interests.length; index++) {
+            if (userDetails.interests[index].label === interestType) {
+                history.push('/peopleNearMe/' + userDetails.interests[index].id);
+                break;
+            }
+        }
     }
-
 
     function goToProfile(e) {
         history.push('/profile');

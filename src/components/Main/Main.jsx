@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import Home from "../Home/Home";
-import SignUpLogin from "../SignUpLogin/SignUpLogin";
 import SignUpLoginWithWidget from "../SignUpLogin/SignUpLoginWithWidget";
 import { withOktaAuth } from '@okta/okta-react';
-
-import { connect } from "react-redux";
 
 export default withOktaAuth(class Home extends Component {
 
@@ -13,11 +9,7 @@ export default withOktaAuth(class Home extends Component {
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
 
-    let options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
+
   }
 
 
@@ -43,12 +35,17 @@ export default withOktaAuth(class Home extends Component {
   // }
 
   componentDidMoint() {
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    }
     navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
       if (result.state === 'granted') {
         console.log('Permission ', result.state);
       } else if (result.state === 'prompt') {
         console.log('Permission ', result.state);
-        navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
+        navigator.geolocation.getCurrentPosition(this.success, this.error, options);
       } else if (result.state === 'denied') {
         console.log('Permission ', result.state);
       }
