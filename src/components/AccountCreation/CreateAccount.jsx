@@ -3,79 +3,79 @@ import BasicDetails from './BasicDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
 import './CreateAccount.scss';
-// import { useFirebase } from "react-redux-firebase";
-// import { useFirestore } from "react-redux-firebase";
+import { useFirebase, useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from 'react-redux';
 
 const CreateAccount = (props) => {
 
-  // const firebase = useFirebase();
-  // const firestore = useFirestore();
+  const firebase = useFirebase();
+  const storageRef = firebase.storage().ref();
+
+
+  useFirestoreConnect([
+    { collection: 'interests' } // or 'interests'
+  ])
+
+  const interestsObj = useSelector((state) => state.firestoreReducer.ordered.interests)
+
+  // eslint-disable-next-line
+  function setImgRefInFirestore() {
+    // Create a reference under which you want to list
+    var listRef = storageRef.child('interests');
+
+    // Find all the prefixes and items.
+    listRef.listAll().then(function (res) {
+      console.log("Res ", res);
+
+      res.prefixes.forEach(function (folderRef) {
+        console.log("folderRef ", folderRef);
+
+        // All the prefixes under listRef.
+        // You may call listAll() recursively on them.
+      });
+      res.items.forEach(function (itemRef) {
+        // All the items under listRef.
+        const fileRef = storageRef.child(itemRef.fullPath);
+        fileRef.getDownloadURL().then(function (url) {
+          // Insert url into an <img> tag to "download"
+          console.log("Showing download url ", url);
+        }).catch(function (error) {
+
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/object-not-found':
+              // File doesn't exist
+              break;
+
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+
+            case 'storage/unknown':
+              // Unknown error occurred, inspect the server response
+              break;
+
+            default :
+              break;
+          }
+        });
+
+      });
+    }).catch(function (error) {
+      // Uh-oh, an error occurred!
+    });
+  }
 
   //State Variables defined
   const [step, setStep] = useState(1);
-  
-  const [interests, setInterests] = useState([
-    {
-      id: '1',
-      img: 'https://picsum.photos/100',
-      label: 'Running'
-    },
-    {
-      id: '2',
-      img: 'https://picsum.photos/100',
-      label: 'Cooking'
-    },
-    {
-      id: '3',
-      img: 'https://picsum.photos/100',
-      label: 'Golfing'
-    },
-    {
-      id: '4',
-      img: 'https://picsum.photos/100',
-      label: 'Badminton'
-    },
-    {
-      id: '5',
-      img: 'https://picsum.photos/100',
-      label: 'Squash'
-    },
-    {
-      id: '6',
-      img: 'https://picsum.photos/100',
-      label: 'Soccer'
-    },
-    {
-      id: '7',
-      img: 'https://picsum.photos/100',
-      label: 'Running'
-    },
-    {
-      id: '8',
-      img: 'https://picsum.photos/100',
-      label: 'Cooking'
-    },
-    {
-      id: '9',
-      img: 'https://picsum.photos/100',
-      label: 'Golfing'
-    },
-    {
-      id: '10',
-      img: 'https://picsum.photos/100',
-      label: 'Badminton'
-    },
-    {
-      id: '11',
-      img: 'https://picsum.photos/100',
-      label: 'Squash'
-    },
-    {
-      id: '12',
-      img: 'https://picsum.photos/100',
-      label: 'Soccer'
-    }
-  ]);
+
+  // eslint-disable-next-line
+  const [interests, setInterests] = useState(interestsObj);
 
   const [basicDetails, setBasicDetails] = useState({
     fullName: '',
@@ -87,12 +87,12 @@ const CreateAccount = (props) => {
     dob: new Date(),
     gender: ''
   });
-  
-  function nextStep () {
+
+  function nextStep() {
     setStep(step + 1);
   }
 
-  function prevStep () {
+  function prevStep() {
     setStep(step - 1);
   }
 
@@ -101,32 +101,32 @@ const CreateAccount = (props) => {
     setInterests(interests);
   };
 
-  function saveBasicDetails (basicDetails) {
+  function saveBasicDetails(basicDetails) {
     console.log("Showing basic details ", basicDetails);
     setBasicDetails(basicDetails);
   }
 
-  function saveAdditionalDetails (additionalDetails) {
+  function saveAdditionalDetails(additionalDetails) {
     console.log("Showing additional details ", additionalDetails);
     setAdditionalDetails(additionalDetails);
   }
 
-  switch(step) {
-  case 1: return <BasicDetails className="CreateAccount"
-                saveBasicDetails={saveBasicDetails}
-                basicDetails={basicDetails}
-                nextStep={nextStep} />;
-  case 2: return <AdditionalDetails className="CreateAccount"
-                saveAdditionalDetails={saveAdditionalDetails}
-                additionalDetails={additionalDetails}
-                nextStep={nextStep}
-                prevStep={prevStep} />;
-  case 3: return <Interests className="CreateAccount"
-                interests={interests}
-                setInterests={setInterests}
-                persistDetails={persistDetails}
-                prevStep={prevStep} />;
-  default: return ;
+  switch (step) {
+    case 1: return <BasicDetails className="CreateAccount"
+      saveBasicDetails={saveBasicDetails}
+      basicDetails={basicDetails}
+      nextStep={nextStep} />;
+    case 2: return <AdditionalDetails className="CreateAccount"
+      saveAdditionalDetails={saveAdditionalDetails}
+      additionalDetails={additionalDetails}
+      nextStep={nextStep}
+      prevStep={prevStep} />;
+    case 3: return <Interests className="CreateAccount"
+      interests={interestsObj}
+      setInterests={setInterests}
+      persistDetails={persistDetails}
+      prevStep={prevStep} />;
+    default: return;
   }
 
 }
