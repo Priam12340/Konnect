@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import BasicDetails from './BasicDetails';
-import AdditionalDetails from './AdditionalDetails';
 import Interests from './Interests';
 import './CreateAccount.scss';
 import { useFirebase, useFirestoreConnect } from "react-redux-firebase";
@@ -71,63 +69,21 @@ const CreateAccount = (props) => {
     });
   }
 
-  //State Variables defined
-  const [step, setStep] = useState(1);
 
   // eslint-disable-next-line
   const [interests, setInterests] = useState(interestsObj);
-
-  const [basicDetails, setBasicDetails] = useState({
-    fullName: '',
-    email: '',
-    password: ''
-  });
-
-  const [additionalDetails, setAdditionalDetails] = useState({
-    dob: new Date(),
-    gender: ''
-  });
-
-  function nextStep() {
-    setStep(step + 1);
-  }
-
-  function prevStep() {
-    setStep(step - 1);
-  }
 
   function persistDetails(interests) {
     console.log("Showing interests ", interests);
     setInterests(interests);
   };
 
-  function saveBasicDetails(basicDetails) {
-    console.log("Showing basic details ", basicDetails);
-    setBasicDetails(basicDetails);
-  }
-
-  function saveAdditionalDetails(additionalDetails) {
-    console.log("Showing additional details ", additionalDetails);
-    setAdditionalDetails(additionalDetails);
-  }
-
-  switch (step) {
-    case 1: return <BasicDetails className="CreateAccount"
-      saveBasicDetails={saveBasicDetails}
-      basicDetails={basicDetails}
-      nextStep={nextStep} />;
-    case 2: return <AdditionalDetails className="CreateAccount"
-      saveAdditionalDetails={saveAdditionalDetails}
-      additionalDetails={additionalDetails}
-      nextStep={nextStep}
-      prevStep={prevStep} />;
-    case 3: return <Interests className="CreateAccount"
+  return (
+    <Interests className="CreateAccount"
       interests={interestsObj}
       setInterests={setInterests}
-      persistDetails={persistDetails}
-      prevStep={prevStep} />;
-    default: return;
-  }
+      persistDetails={persistDetails} />
+  );
 
 }
 

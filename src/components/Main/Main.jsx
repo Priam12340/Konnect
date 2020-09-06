@@ -1,15 +1,19 @@
 import React, { Component } from "react";
+import Home from "../Home/Home";
 import SignUpLoginWithWidget from "../SignUpLogin/SignUpLoginWithWidget";
 import { withOktaAuth } from '@okta/okta-react';
 
-export default withOktaAuth(class Home extends Component {
+export default withOktaAuth(class Main extends Component {
 
   constructor(props) {
     super(props);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
 
-
+    this.state = {
+      authenticated: null,
+      error: null
+    };
   }
 
 
@@ -34,7 +38,7 @@ export default withOktaAuth(class Home extends Component {
   //   });
   // }
 
-  componentDidMoint() {
+  componentDidMount() {
     let options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -56,10 +60,11 @@ export default withOktaAuth(class Home extends Component {
   }
 
   render() {
+    console.log("AuthState being received ", this.props.authState);
     if (this.props.authState.isPending) return null;
     const button = this.props.authState.isAuthenticated ?
-    <Home /> :
-    <SignUpLoginWithWidget baseUrl='https://dev-634748.okta.com' />;
+      <Home /> :
+      <SignUpLoginWithWidget baseUrl='https://dev-634748.okta.com' />;
     return (
       <div>
         {button}

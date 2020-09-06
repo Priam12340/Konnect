@@ -18,11 +18,7 @@
 
         .interest-card-item {
             cursor: pointer;
-            width: 18rem;
-
-            .interest-card-image {
-
-            }
+            width: 15rem;
 
             .interest-card-body {
                 .interest-card-title {
@@ -32,17 +28,18 @@
         }
     }
 
-
     .grid-cols {
+        display: flex;
         -moz-column-count:2;
         -moz-column-gap: 5px;
         -moz-column-width: 50%;
         -webkit-column-count:2;
         -webkit-column-gap: 5px;
-        -webkit-column-width: 2505%;
+        -webkit-column-width: 50%;
         column-count: 2;
         column-gap: 5px;
         column-width: 50%;
     }
+
 
 }

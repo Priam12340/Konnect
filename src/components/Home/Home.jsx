@@ -5,11 +5,14 @@ import { masonryOptions } from "../../exports";
 import { useHistory } from 'react-router-dom';
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from 'react-redux';
+import { useOktaAuth } from '@okta/okta-react';
 
 import profileImgComponent from '../../assets/profileComponent.png'
 import './Home.scss';
 
 const Home = (props) => {
+    const { authService, authState } = useOktaAuth();
+    const authStateReady = !authState.isPending;
 
     const userId = props.userId || 'lN7pGUXx8wx4Y2ajnmm7';
     const history = useHistory();
@@ -29,7 +32,10 @@ const Home = (props) => {
         state.firestoreReducer.data.users[userId])
 
     useEffect(() => {
-
+        if (!authStateReady) {
+            authService.handleAuthentication();
+        }
+        console.log("Show authState", authState);
         let index;
         if (userDetails && userDetails.interests && userDetails.interests.length > 0 && interests.length === 0) {
             for (index = 0; index < userDetails.interests.length; index++) {
@@ -46,10 +52,14 @@ const Home = (props) => {
                     .catch(function (error) {
                         console.log("Error getting documents: ", error);
                     });
-                    
+
             }
         }
     })
+
+    if(authStateReady && authState.error) { 
+        console.log("Error on authstate", authState.error);
+      }
 
     function handleCardClick(interestId) {
         console.log("Show interestId", interestId);
