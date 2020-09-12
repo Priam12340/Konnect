@@ -20,6 +20,48 @@ const PeopleNearMe = (props) => {
         city: 'New York',
         state: 'NY',
         email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithishni',
+        city: 'San Francisco',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
+    },{
+        id: '2',
+        name: 'Prithi',
+        city: 'New York',
+        state: 'NY',
+        email: 'prithishni91@gmail.com'
     }];
 
     function goToProfile(e) {
@@ -34,8 +76,8 @@ const PeopleNearMe = (props) => {
             <h4>People Near Me</h4>
             <div className="Persons">
                 {
-                    users && users.map(user => {
-                        return <Person user={user} />
+                    users && users.map((user, i) => {
+                        return <Person key={i} user={user} />
                     })
                 }
             </div>

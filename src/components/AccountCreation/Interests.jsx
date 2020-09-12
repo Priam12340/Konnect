@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from 'react-bootstrap/Modal';
 import ImagePicker from 'react-image-picker';
 import Masonry from "react-masonry-component";
@@ -15,6 +15,10 @@ const Interests = (props) => {
   const [showCompletion, setShowCompletion] = useState(false);
 
   const [interestsArray, setInterestsArray] = useState(props.interests);
+
+  useEffect(() => {
+    console.log("Showing interests being received ", props);
+  });
 
   function handleSaveDetails() {
     props.persistDetails(interestsArray);
@@ -51,13 +55,13 @@ const Interests = (props) => {
           disableImagesLoaded={false}
           updateOnEachImageLoad={false}
         >
-          <div id="grid_div" className="grid-cols">
+          {props.interests &&<div id="grid_div" className="grid-cols">
             <ImagePicker
               images={props.interests.map((interest, i) => ({ src: interest.img, value: interest }))}
               onPick={onPick}
               multiple
             />
-          </div>
+          </div>}
         </Masonry>
       </div>
       {showCompletion && <Modal dialogClassName="completion-modal" centered animation={false} show={showCompletion} onHide={acceptAck}>

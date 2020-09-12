@@ -12,6 +12,7 @@ export default withOktaAuth(class SignUpLoginWithWidget extends Component {
 
   onSuccess(res) {
     if (res.status === 'SUCCESS') {
+      console.log("Show res onSuccess ", res);
       return this.props.authService.redirect({
         sessionToken: res.session.token
       });

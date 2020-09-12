@@ -4,6 +4,7 @@ import {
   Switch
 } from 'react-router-dom';
 import { Security } from '@okta/okta-react';
+import { useHistory } from 'react-router-dom';
 
 import Main from "./components/Main/Main";
 import Home from "./components/Home/Home";
@@ -16,14 +17,15 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fab, faCheckSquare, faCoffee, faEnvelope)
 
 function App(props) {
+  const history = useHistory();
 
   function onAuthRequired() {
-    props.history.push('/home');
+    history.push('/login');
   }
 
   let config = {
@@ -31,11 +33,9 @@ function App(props) {
     clientId: '0oas5wo0qLyjtyiHo4x6',
     redirectUri: window.location.origin + '/home',
     onAuthRequired: { onAuthRequired },
-    idps: [
-      { type: 'Facebook', id: '0oau09hynibyENpba4x6' }
-    ],
-    idpDisplay: "SECONDARY"
-  }
+    scopes: ['openid', 'profile', 'email'],
+    pkce: false,
+}
 
   return (
     <div className="App">
