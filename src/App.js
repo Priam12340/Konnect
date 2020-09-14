@@ -33,7 +33,6 @@ function App(props) {
     clientId: '0oas5wo0qLyjtyiHo4x6',
     redirectUri: window.location.origin + '/home',
     onAuthRequired: { onAuthRequired },
-    scopes: ['openid', 'profile', 'email'],
     pkce: false,
 }
 

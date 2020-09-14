@@ -14,20 +14,24 @@ const Person = (props) => {
         history.push('/profile');
     }
 
+    function addBuddy(buddyDetails) {
+        props.addBuddy(buddyDetails);
+    }
+
     return (
         <div className="PersonCard">
             <div className="profile-nav">
                 <img src={profileImgComponent} alt="Profile Page" onClick={goToProfile} />
             </div>
             <div className="user-details">
-                <p className="user-name">{props.user.name}</p>
+                <p className="user-name">{props.user.firstName}</p>
                 <p className="user-area">{props.user.city}, {props.user.state}</p>
             </div>
             <div className="mail-icon">
                 <a href={`mailto:${props.user.email}`}><FontAwesomeIcon icon={faEnvelope} /></a>
             </div>
-            <div className="plus-icon">
-                <FontAwesomeIcon icon={faPlus} />
+            <div className="plus-icon" onClick={() => addBuddy(props.user)}>
+                <FontAwesomeIcon icon={faPlus}/>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 export default class OktaSignInWidget extends Component {
+
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this);
 
@@ -18,12 +19,12 @@ export default class OktaSignInWidget extends Component {
         pkce: false,
         issuer: 'https://dev-634748.okta.com/oauth2/default',
         responseType: ['token', 'id_token'],
-        scopes: ['openid', 'email', 'profile', 'address', 'phone']
+        scopes: ['openid', 'email', 'profile'],
+        display: 'popup'
       },
       features: {
         registration: true,
         rememberMe: true,
-        idpDiscovery: true
       },
       idps: [
         { type: 'Google', id: '0oau0f5ydTqXn4icM4x6' },
@@ -31,6 +32,7 @@ export default class OktaSignInWidget extends Component {
       ],
       idpDisplay: "SECONDARY"
     });
+
     this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);
   }
 

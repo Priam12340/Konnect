@@ -26,7 +26,6 @@ const BasicDetails = (props) => {
     password: StringType().isRequired('This field is required.'),
     verifyPassword: StringType()
       .addRule((value, data) => {
-        console.log(data);
 
         if (value !== data.password) {
           return false;

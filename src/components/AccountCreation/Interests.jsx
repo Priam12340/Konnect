@@ -64,8 +64,8 @@ const Interests = (props) => {
           </div>}
         </Masonry>
       </div>
-      {showCompletion && <Modal dialogClassName="completion-modal" centered animation={false} show={showCompletion} onHide={acceptAck}>
-        <Modal.Body>
+      {showCompletion && <Modal dialogclassName="completion-modal" centered animation={false} show={showCompletion} onHide={acceptAck}>
+        <Modal.Body className="completion-modal-body" style={{ height: '100vh' }}>
           <div className="modal-section">
             <div className="completion-modal-title">
               BRAVO!

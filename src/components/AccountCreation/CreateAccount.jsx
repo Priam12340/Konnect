@@ -74,7 +74,6 @@ const CreateAccount = (props) => {
   const [interests, setInterests] = useState(interestsObj);
 
   function persistDetails(interests) {
-    console.log("Showing interests ", interests);
     setInterests(interests);
   };
 
