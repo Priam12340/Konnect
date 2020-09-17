@@ -66,7 +66,7 @@ class apiCalls {
     }
 
     fetchLocationDetails(latitude, longitude) {
-        const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=AIzaSyBu-OgqVbC4X761LHLduYtwzT5caWAAwEs';
+        const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=' + process.env.REACT_APP_GOOGLE_MAPS_KEY;
         return this.getWithAPI(url, 'locationDetails');
     }
 }
