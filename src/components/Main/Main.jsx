@@ -72,14 +72,13 @@ export default withOktaAuth(class Main extends Component {
 
   render() {
     if (this.props.authState.isPending) return null;
-    //eslint-disable-next-line no-unused-vars
-    const button = this.props.authState.isAuthenticated ?
-      <Home latitude={this.state.latitude} longitude={this.state.longitude} /> :
-      <SignUpLoginWithWidget baseUrl='https://dev-634748.okta.com' />;
+    
     return (
       <div>
-        <Home latitude={this.state.latitude} longitude={this.state.longitude} /> :
-        {/* {button} */}
+        {this.props.authState.isAuthenticated &&
+          <Home latitude={this.state.latitude} longitude={this.state.longitude} />}
+        { !this.props.authState.isAuthenticated &&
+          <SignUpLoginWithWidget baseUrl='https://dev-634748.okta.com' />}
       </div>
     );
   }

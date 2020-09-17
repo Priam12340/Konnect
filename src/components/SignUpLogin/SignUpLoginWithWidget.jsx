@@ -1,39 +1,41 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './Login/OktaSignInWidget';
-import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 
-export default withOktaAuth(class SignUpLoginWithWidget extends Component {
-  constructor(props) {
-    super(props);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onError = this.onError.bind(this);
-  }
+const SignUpLoginWithWidget = (props) => {
 
-  onSuccess(res) {
+  const { authService, authState } = useOktaAuth();
+  const firestore = useFirestore();
+  
+  function onSuccess(res) {
     if (res.status === 'SUCCESS') {
-      console.log("Show res onSuccess ", res);
-      return this.props.authService.redirect({
+      return authService.redirect({
         sessionToken: res.session.token
       });
-   } else {
-    // The user can be in another authentication state that requires further action.
-    // For more information about these states, see:
-    //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+    } else {
+      // The user can be in another authentication state that requires further action.
+      // For more information about these states, see:
+      //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
     }
   }
 
-  onError(err) {
+  function onError(err) {
     console.log('error logging in', err);
   }
 
-  render() {
-    if (this.props.authState.isPending) return null;
-    return this.props.authState.isAuthenticated ?
-      <Redirect to={{ pathname: '/' }}/> :
-      <OktaSignInWidget
-        baseUrl={this.props.baseUrl}
-        onSuccess={this.onSuccess}
-        onError={this.onError}/>;
+  function onSignUp(postData) {
+    firestore.set({ collection: 'users', doc: postData.email }, postData);
   }
-});
+
+  if (authState.isPending) return null;
+  return authState.isAuthenticated ?
+    <Redirect to={{ pathname: '/' }} /> :
+    <OktaSignInWidget
+      baseUrl={props.baseUrl}
+      onSuccess={onSuccess}
+      onError={onError} />;
+}
+
+export default SignUpLoginWithWidget;

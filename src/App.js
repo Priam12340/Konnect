@@ -11,7 +11,7 @@ import Home from "./components/Home/Home";
 import PeopleNearMe from "./components/PeopleNearMe/PeopleNearMe";
 import SignUpLoginWithWidget from "./components/SignUpLogin/SignUpLoginWithWidget";
 import CreateAccount from "./components/AccountCreation/CreateAccount";
-import Profile from "./components/Profile/Profile";
+import Profile from "./containers/Profile";
 import './App.css';
 
 

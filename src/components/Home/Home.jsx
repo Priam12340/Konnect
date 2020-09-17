@@ -96,8 +96,12 @@ const Home = (props) => {
         history.push('/peopleNearMe/' + interestId, propsPropagated);
     }
 
-    function goToProfile(e) {
-        history.push('/profile');
+    function goToProfile() {
+        let propsPropagated = {
+            latitude: props.latitude,
+            longitude: props.longitude
+        };
+        history.push('/profile', propsPropagated);
     }
 
     return (
