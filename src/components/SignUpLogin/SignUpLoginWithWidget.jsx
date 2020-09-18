@@ -36,7 +36,6 @@ const SignUpLoginWithWidget = (props) => {
     console.log("postData",postData);
     onSuccess(postData);
     let userData = {
-      age: postData.age,
       displayName: postData.displayName,
       email: postData.email,
       firstName: postData.firstName,
