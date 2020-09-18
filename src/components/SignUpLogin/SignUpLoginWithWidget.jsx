@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './Login/OktaSignInWidget';
 import { useOktaAuth } from '@okta/okta-react';
-import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 
 const SignUpLoginWithWidget = (props) => {
 
   const { authService, authState } = useOktaAuth();
   const firestore = useFirestore();
-  
+
   function onSuccess(res) {
     if (res.status === 'SUCCESS') {
       return authService.redirect({
@@ -25,8 +25,30 @@ const SignUpLoginWithWidget = (props) => {
     console.log('error logging in', err);
   }
 
-  function onSignUp(postData) {
-    firestore.set({ collection: 'users', doc: postData.email }, postData);
+  function parseSchema (schema, onSuccess, onFailure) {
+    // handle parseSchema callback
+    console.log("schema",schema);
+    onSuccess(schema);
+  }
+
+  function preSubmit (postData, onSuccess, onFailure) {
+    // handle preSubmit callback and push data to firebase
+    console.log("postData",postData);
+    onSuccess(postData);
+    let userData = {
+      age: postData.age,
+      displayName: postData.displayName,
+      email: postData.email,
+      firstName: postData.firstName,
+      lastName: postData.lastName
+    }
+    firestore.set({ collection: 'users', doc: userData.displayName }, userData);
+  }
+
+  function postSubmit (response, onSuccess, onFailure) {
+    // handle postsubmit callback
+    console.log("response",response);
+    onSuccess(response);
   }
 
   if (authState.isPending) return null;
@@ -35,6 +57,9 @@ const SignUpLoginWithWidget = (props) => {
     <OktaSignInWidget
       baseUrl={props.baseUrl}
       onSuccess={onSuccess}
+      parseSchema={parseSchema}
+      preSubmit={preSubmit}
+      postSubmit={postSubmit}
       onError={onError} />;
 }
 

@@ -26,7 +26,7 @@ const Profile = (props) => {
 
         const { userDetails: currentUserDetails, locationDetails } = props;
         if (currentUserDetails && locationDetails && (JSON.stringify(prevUserDetails) !== JSON.stringify(currentUserDetails))) {
-            let plusCode = locationDetails && locationDetails.plus_code.compound_code || '';
+            let plusCode = (locationDetails && locationDetails.plus_code.compound_code) || '';
             let address = plusCode.substring(plusCode.indexOf(' ') + 1);
             let [city, state, country] = address.split(',');
             currentUserDetails['city'] = city;

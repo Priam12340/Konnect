@@ -9,22 +9,9 @@ export default class OktaSignInWidget extends Component {
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
       registration: {
-        parseSchema: function (schema, onSuccess, onFailure) {
-          // handle parseSchema callback
-          console.log("schema",schema);
-          onSuccess(schema);
-        },
-        preSubmit: function (postData, onSuccess, onFailure) {
-          // handle preSubmit callback and push data to firebase
-          console.log("postData",postData);
-          // this.props.onSignUp();
-          onSuccess(postData);
-        },
-        postSubmit: function (response, onSuccess, onFailure) {
-          // handle postsubmit callback
-          console.log("response",response);
-          onSuccess(response);
-        }
+        parseSchema: this.props.parseSchema,
+        preSubmit: this.props.preSubmit,
+        postSubmit: this.props.postSubmit
       },
       authParams: {
         // If your app is configured to use the Implicit Flow 
