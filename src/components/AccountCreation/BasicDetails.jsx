@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Form, FormGroup, FormControl, ControlLabel, Button, Schema } from 'rsuite';
+import { Form, FormGroup, FormControl, ControlLabel, Schema } from 'rsuite';
 import './BasicDetails.scss';
+import next from '../../assets/next.png';
 
 class TextField extends React.PureComponent {
   render() {
@@ -25,12 +26,11 @@ const BasicDetails = (props) => {
     password: StringType().isRequired('This field is required.'),
     verifyPassword: StringType()
       .addRule((value, data) => {
-        console.log(data);
-  
+
         if (value !== data.password) {
           return false;
         }
-  
+
         return true;
       }, 'The two passwords do not match')
       .isRequired('This field is required.')
@@ -43,25 +43,35 @@ const BasicDetails = (props) => {
     props.nextStep();
   }
 
+  function handlePrevious() {
+    //navigate to signuplogin page
+  }
+
   return (
     <div className="BasicDetails">
-      <Form model={model} 
-            formDefaultValue={formValue || ''} 
-            onChange={formValue => setFormValue(formValue)}>
-        <div className="fullName">
-          <TextField name="fullName" placeholder="Full name"/>
-        </div>
+      <img className="Prev" src={next} onClick={handlePrevious} alt="Previous" />
+      <img className="Next" src={next} onClick={handleSaveAndContinue} alt="Save&amp;Continue" />
+      <div className="BasicDetailsSection">
+      <h4>Create Account</h4>
+      <div className="BasicDetailsForm">
+        <Form model={model}
+          formDefaultValue={formValue || ''}
+          onChange={formValue => setFormValue(formValue)}>
+          <div className="fullName">
+            <TextField name="fullName" placeholder="Full Name" />
+          </div>
 
-        <div className="email">
-          <TextField name="email" placeholder="email ID" />
-        </div>
+          <div className="email">
+            <TextField name="email" placeholder="Email" />
+          </div>
 
-        <div className="password">
-          <TextField name="password" placeholder="Password" type="password" />
-          <TextField name="verifyPassword" placeholder="Verify Password" type="password" />
+          <div className="password">
+            <TextField name="password" placeholder="Password" type="password" />
+            <TextField name="verifyPassword" placeholder="Verify password" type="password" />
+          </div>
+        </Form>
         </div>
-      </Form>
-      <Button size="lg" pill="true" theme="light" onClick={handleSaveAndContinue}>Save &amp; Continue</Button>
+      </div>
     </div >
   );
 }
