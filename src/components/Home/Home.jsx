@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from 'react-redux';
 import { useOktaAuth } from '@okta/okta-react';
+import { GeoFirestore } from "geofirestore";
 
 import profileImgComponent from '../../assets/profileComponent.png'
 import './Home.scss';
@@ -16,8 +17,12 @@ const Home = (props) => {
 
     const userId = props.userId || 'lN7pGUXx8wx4Y2ajnmm7';
     const history = useHistory();
+    const latitude = props.latitude || 0;
+    const longitude = props.longitude || 0;
 
     const firestore = useFirestore();
+    const geofirestore = new GeoFirestore(firestore);
+    const geocollection = geofirestore.collection("locations");
 
     const [interests, setInterests] = useState([]);
 
@@ -31,11 +36,17 @@ const Home = (props) => {
         state.firestoreReducer.data.users &&
         state.firestoreReducer.data.users[userId])
 
+    geocollection.doc(userId).set({
+        userId: userId,
+        coordinates: new firestore.GeoPoint(latitude, longitude),
+    });
+
     useEffect(() => {
         if (!authStateReady) {
             authService.handleAuthentication();
         }
-        console.log("Show authState", authState);
+
+
         let index;
         if (userDetails && userDetails.interests && userDetails.interests.length > 0 && interests.length === 0) {
             for (index = 0; index < userDetails.interests.length; index++) {
@@ -57,17 +68,40 @@ const Home = (props) => {
         }
     })
 
-    if(authStateReady && authState.error) { 
+    if (authStateReady && authState.error) {
         console.log("Error on authstate", authState.error);
-      }
-
-    function handleCardClick(interestId) {
-        console.log("Show interestId", interestId);
-        history.push('/peopleNearMe/' + interestId);
     }
 
-    function goToProfile(e) {
-        history.push('/profile');
+    function handleCardClick(interestId) {
+
+        let interestedObj = interests.filter(function (interest) {
+            return interest.id === interestId;
+        })
+        .map(function(interest) {
+          return interest.users;
+        });
+
+        interestedObj = interestedObj[0];
+        const userIds = interestedObj.map(function (user) {
+            return user.id;
+        });
+        console.log("Show userIds", userIds);
+
+        let propsPropagated = {
+            latitude: props.latitude,
+            longitude: props.longitude,
+            interestId: interestId,
+            userIds: userIds
+        };
+        history.push('/peopleNearMe/' + interestId, propsPropagated);
+    }
+
+    function goToProfile() {
+        let propsPropagated = {
+            latitude: props.latitude,
+            longitude: props.longitude
+        };
+        history.push('/profile', propsPropagated);
     }
 
     return (
@@ -89,7 +123,6 @@ const Home = (props) => {
                     updateOnEachImageLoad={false}
                 >
                     <div id="grid_div" className="grid-cols">
-                        {console.log("Interests obj ", interests)}
                         {interests && interests.map((interest, i) => (
                             <div key={interest.id} className="user-interest-card">
                                 <Card className="interest-card-item" as="a" onClick={() => handleCardClick(interest.id)}>
